@@ -4,7 +4,7 @@ SnapAnnotate 是一款面向 Windows 的开源截图与标注工具。它提供�
 
 > 当前版本：`0.1.0`。项目处于早期公开测试阶段，请在正式工作流中使用前自行验证。
 
-[English](README.en.md) · [下载安装](https://github.com/mercyjason/SnapAnnotate/releases) · [反馈问题](https://github.com/mercyjason/SnapAnnotate/issues)
+[English](README.en.md) · [下载安装](https://github.com/chendawang/SnapAnnotate/releases) · [反馈问题](https://github.com/chendawang/SnapAnnotate/issues)
 
 ## 功能
 
@@ -22,7 +22,7 @@ SnapAnnotate 是一款面向 Windows 的开源截图与标注工具。它提供�
 
 ## 安装
 
-从 [GitHub Releases](https://github.com/mercyjason/SnapAnnotate/releases) 下载最新的 `ScreenshotAssistant-Setup-*-win-x64.exe`，运行后按向导安装。
+从 [GitHub Releases](https://github.com/chendawang/SnapAnnotate/releases) 下载最新的 `ScreenshotAssistant-Setup-*-win-x64.exe`，运行后按向导安装。
 
 要求：Windows 10/11 x64。安装包为自包含发布，不要求单独安装 .NET Runtime。
 

@@ -54,7 +54,7 @@ public sealed partial class App : Application, IDisposable
             Version currentVersion = typeof(App).Assembly.GetName().Version ?? new Version(0, 1, 0);
             GitHubUpdateService updateService = new(
                 _updateHttpClient,
-                "mercyjason",
+                "chendawang",
                 "SnapAnnotate",
                 currentVersion);
             _mainWindow = new MainWindow(

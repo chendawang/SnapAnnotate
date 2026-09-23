@@ -11,8 +11,8 @@ public sealed class GitHubUpdateServiceTests
     {
         using HttpClient client = CreateClient(
             HttpStatusCode.OK,
-            """{"tag_name":"v0.2.0","html_url":"https://github.com/mercyjason/SnapAnnotate/releases/tag/v0.2.0"}""");
-        GitHubUpdateService service = new(client, "mercyjason", "SnapAnnotate", new Version(0, 1, 0));
+            """{"tag_name":"v0.2.0","html_url":"https://github.com/chendawang/SnapAnnotate/releases/tag/v0.2.0"}""");
+        GitHubUpdateService service = new(client, "chendawang", "SnapAnnotate", new Version(0, 1, 0));
 
         UpdateCheckResult result = await service.CheckAsync(TestContext.Current.CancellationToken);
 
@@ -26,8 +26,8 @@ public sealed class GitHubUpdateServiceTests
     {
         using HttpClient client = CreateClient(
             HttpStatusCode.OK,
-            """{"tag_name":"0.1.0","html_url":"https://github.com/mercyjason/SnapAnnotate/releases/tag/v0.1.0"}""");
-        GitHubUpdateService service = new(client, "mercyjason", "SnapAnnotate", new Version(0, 1, 0));
+            """{"tag_name":"0.1.0","html_url":"https://github.com/chendawang/SnapAnnotate/releases/tag/v0.1.0"}""");
+        GitHubUpdateService service = new(client, "chendawang", "SnapAnnotate", new Version(0, 1, 0));
 
         UpdateCheckResult result = await service.CheckAsync(TestContext.Current.CancellationToken);
 
@@ -38,7 +38,7 @@ public sealed class GitHubUpdateServiceTests
     public async Task CheckAsync_ReturnsUnavailable_WhenNoReleaseExists()
     {
         using HttpClient client = CreateClient(HttpStatusCode.NotFound, "{}");
-        GitHubUpdateService service = new(client, "mercyjason", "SnapAnnotate", new Version(0, 1, 0));
+        GitHubUpdateService service = new(client, "chendawang", "SnapAnnotate", new Version(0, 1, 0));
 
         UpdateCheckResult result = await service.CheckAsync(TestContext.Current.CancellationToken);
 

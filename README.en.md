@@ -4,7 +4,7 @@ SnapAnnotate is an open-source screenshot and annotation tool for Windows. It su
 
 > Current version: `0.1.0`. This is an early public test release.
 
-[中文说明](README.md) · [Releases](https://github.com/mercyjason/SnapAnnotate/releases) · [Issues](https://github.com/mercyjason/SnapAnnotate/issues)
+[中文说明](README.md) · [Releases](https://github.com/chendawang/SnapAnnotate/releases) · [Issues](https://github.com/chendawang/SnapAnnotate/issues)
 
 ## Highlights
 
@@ -20,7 +20,7 @@ Screenshots, settings, and history stay on your computer by default. SnapAnnotat
 
 ## Install
 
-Download the latest `ScreenshotAssistant-Setup-*-win-x64.exe` from [GitHub Releases](https://github.com/mercyjason/SnapAnnotate/releases). Windows 10/11 x64 is supported; the installer is self-contained.
+Download the latest `ScreenshotAssistant-Setup-*-win-x64.exe` from [GitHub Releases](https://github.com/chendawang/SnapAnnotate/releases). Windows 10/11 x64 is supported; the installer is self-contained.
 
 ## Build
 

@@ -7,7 +7,7 @@
     <Description>快捷截图、屏幕标注与本地截图记录工具</Description>
     <Authors>SnapAnnotate contributors</Authors>
     <Company>SnapAnnotate</Company>
-    <RepositoryUrl>https://github.com/mercyjason/SnapAnnotate</RepositoryUrl>
+    <RepositoryUrl>https://github.com/chendawang/SnapAnnotate</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <Version>0.1.0</Version>

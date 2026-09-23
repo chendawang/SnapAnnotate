@@ -19,5 +19,5 @@
 - 全局快捷键、托盘、单实例、开机启动和悬浮工具；
 - 截图框样式及保存设置。
 
-[Unreleased]: https://github.com/mercyjason/SnapAnnotate/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/mercyjason/SnapAnnotate/releases/tag/v0.1.0
+[Unreleased]: https://github.com/chendawang/SnapAnnotate/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/chendawang/SnapAnnotate/releases/tag/v0.1.0

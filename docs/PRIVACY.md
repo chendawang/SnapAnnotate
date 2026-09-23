@@ -4,7 +4,7 @@ SnapAnnotate 是本地桌面程序。截图图片、截图历史和设置默认�
 
 ## 网络访问
 
-程序仅在用户点击“检查更新”时，请求 GitHub 公共 Releases API，查询 `mercyjason/SnapAnnotate` 的最新正式版本。请求不包含截图、截图历史、文件名或应用设置。程序不会自动下载或运行更新。
+程序仅在用户点击“检查更新”时，请求 GitHub 公共 Releases API，查询 `chendawang/SnapAnnotate` 的最新正式版本。请求不包含截图、截图历史、文件名或应用设置。程序不会自动下载或运行更新。
 
 ## 本地数据
 
