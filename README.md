@@ -6,6 +6,10 @@ SnapAnnotate 是一款面向 Windows 的开源截图与标注工具。它提供�
 
 [English](README.en.md) · [下载安装](https://github.com/chendawang/SnapAnnotate/releases) · [反馈问题](https://github.com/chendawang/SnapAnnotate/issues)
 
+## 主界面
+
+![SnapAnnotate 截图助手主界面](docs/images/main-window.png)
+
 ## 功能
 
 - `Ctrl+Shift+A` 冻结屏幕并开始区域截图；

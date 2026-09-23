@@ -6,6 +6,10 @@ SnapAnnotate is an open-source screenshot and annotation tool for Windows. It su
 
 [中文说明](README.md) · [Releases](https://github.com/chendawang/SnapAnnotate/releases) · [Issues](https://github.com/chendawang/SnapAnnotate/issues)
 
+## Main window
+
+![SnapAnnotate main window](docs/images/main-window.png)
+
 ## Highlights
 
 - Press `Ctrl+Shift+A` to freeze the desktop and start a region capture.
