@@ -1,0 +1,20 @@
+bin/
+obj/
+.vs/
+.idea/
+TestResults/
+.artifacts/
+artifacts/
+dist/
+.vendor/
+*.user
+*.suo
+*.cache
+*.log
+
+# Local application data and captures
+.data/
+captures/
+*.db
+*.db-shm
+*.db-wal

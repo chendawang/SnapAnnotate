@@ -1,0 +1,210 @@
+<Window
+    x:Class="ScreenshotAssistant.App.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:theming="clr-namespace:ShareX.AvaloniaUI.Theming;assembly=ShareX.Avalonia"
+    Title="截图助手"
+    Icon="avares://ScreenshotAssistant.App/Assets/ScreenshotAssistant.ico"
+    Width="800"
+    Height="600"
+    MinWidth="800"
+    MinHeight="600"
+    Background="#F4F4F4"
+    Foreground="#202124"
+    WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="SurfaceBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="MutedBrush" Color="#777C85" />
+        <SolidColorBrush x:Key="AccentBrush" Color="#338FF5" />
+        <SolidColorBrush x:Key="BorderBrush" Color="#E5E5E5" />
+    </Window.Resources>
+
+    <Window.Styles>
+        <Style Selector="Button.nav">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Padding" Value="14,0" />
+            <Setter Property="Margin" Value="0,2" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#41464E" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="6" />
+        </Style>
+        <Style Selector="Button.nav:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#EAF3FF" />
+        </Style>
+        <Style Selector="Button.nav.selected">
+            <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style Selector="Button.nav.selected:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+        </Style>
+        <Style Selector="Button.action">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="MinHeight" Value="74" />
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+        </Style>
+        <Style Selector="Button.action:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#F8FBFF" />
+            <Setter Property="BorderBrush" Value="#9CC7FA" />
+        </Style>
+        <Style Selector="Button.historyAction">
+            <Setter Property="Width" Value="28" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Foreground" Value="#626872" />
+        </Style>
+        <Style Selector="Button.historyAction:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#EEF5FD" />
+            <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+        </Style>
+        <Style Selector="CheckBox.historySelector">
+            <Setter Property="Width" Value="18" />
+            <Setter Property="Height" Value="18" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border x:Name="SelectionIndicator"
+                            Width="18"
+                            Height="18"
+                            Background="Transparent"
+                            BorderBrush="#8D96A3"
+                            BorderThickness="1"
+                            CornerRadius="3">
+                        <TextBlock x:Name="CheckIcon"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontFamily="{DynamicResource ShareX.FontFamily.Icon}"
+                                   FontSize="12"
+                                   FontWeight="Normal"
+                                   Foreground="White"
+                                   IsVisible="False"
+                                   Text="{x:Static theming:LucideIcons.check}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:pointerover /template/ Border#SelectionIndicator">
+                <Setter Property="BorderBrush" Value="#338FF5" />
+            </Style>
+            <Style Selector="^:checked /template/ Border#SelectionIndicator">
+                <Setter Property="Background" Value="#338FF5" />
+                <Setter Property="BorderBrush" Value="#338FF5" />
+            </Style>
+            <Style Selector="^:checked /template/ TextBlock#CheckIcon">
+                <Setter Property="IsVisible" Value="True" />
+            </Style>
+        </Style>
+    </Window.Styles>
+
+    <Grid ColumnDefinitions="152,*">
+        <Border Grid.Column="0" Padding="10,16,10,10" Background="White" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,1,0">
+            <Grid>
+                <StackPanel>
+                    <Button x:Name="CaptureNavButton" Classes="nav selected" Click="ShowCapturePage_Click" Content="快捷截图" />
+                    <Button x:Name="HistoryNavButton" Classes="nav" Click="ShowHistoryPage_Click" Content="截图记录" />
+                    <Button x:Name="SettingsNavButton" Classes="nav" Click="ShowSettingsPage_Click" Content="设置" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Column="1">
+            <Grid x:Name="CapturePage" RowDefinitions="Auto,Auto,*" Margin="20,16,20,18">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button Width="210" Classes="action" Click="CaptureToFile_Click">
+                        <StackPanel Spacing="5">
+                            <TextBlock FontSize="14" FontWeight="SemiBold" Text="截图到文件" />
+                            <TextBlock x:Name="QuickCaptureShortcutText" FontSize="10" Foreground="{StaticResource MutedBrush}" Text="Ctrl + Shift + A" />
+                            <Border Width="30" Height="3" Margin="0,3,0,0" HorizontalAlignment="Left" Background="{StaticResource AccentBrush}" CornerRadius="2" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button Width="210" Classes="action" Click="ShowFloatingToolbar_Click">
+                        <StackPanel Spacing="5">
+                            <TextBlock FontSize="14" FontWeight="SemiBold" Text="显示悬浮工具" />
+                            <TextBlock FontSize="10" Foreground="{StaticResource MutedBrush}" Text="显示为悬浮小工具" />
+                            <Border Width="30" Height="3" Margin="0,3,0,0" HorizontalAlignment="Left" Background="#29B875" CornerRadius="2" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <TextBlock x:Name="StatusText" IsVisible="False" />
+
+                <Grid Grid.Row="1" Margin="0,14,0,8" ColumnDefinitions="*,Auto">
+                    <TextBlock VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold" Text="截图记录" />
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                        <Button x:Name="CaptureCopySelectedButton" IsEnabled="False" Padding="10,4" Click="CopySelectedHistory_Click" Content="复制" />
+                        <Button x:Name="CaptureDeleteSelectedButton" IsEnabled="False" Padding="10,4" Click="DeleteSelectedHistory_Click" Content="删除" />
+                        <Button Padding="10,4" Click="RefreshHistory_Click" Content="刷新" />
+                    </StackPanel>
+                </Grid>
+
+                <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel x:Name="HistoryGroupsPanel" Spacing="18">
+                        <TextBlock Foreground="{StaticResource MutedBrush}" Text="正在读取本地截图……" />
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+            <Grid x:Name="HistoryPage" IsVisible="False" RowDefinitions="Auto,*" Margin="20,16,20,18">
+                <Grid ColumnDefinitions="*,Auto">
+                    <StackPanel Spacing="2">
+                        <TextBlock FontSize="24" FontWeight="SemiBold" Text="截图记录" />
+                        <TextBlock FontSize="11" Foreground="{StaticResource MutedBrush}" Text="按日期整理本地 PNG，点击缩略图打开原图" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                        <Button x:Name="FullHistoryCopySelectedButton" IsEnabled="False" Padding="12,6" Click="CopySelectedHistory_Click" Content="复制" />
+                        <Button x:Name="FullHistoryDeleteSelectedButton" IsEnabled="False" Padding="12,6" Click="DeleteSelectedHistory_Click" Content="删除" />
+                        <Button Padding="12,6" Click="RefreshHistory_Click" Content="刷新" />
+                    </StackPanel>
+                </Grid>
+                <ScrollViewer x:Name="FullHistoryScrollViewer"
+                              Grid.Row="1"
+                              Margin="0,16,0,0"
+                              HorizontalScrollBarVisibility="Disabled"
+                              ScrollChanged="FullHistoryScrollViewer_ScrollChanged">
+                    <StackPanel x:Name="FullHistoryGroupsPanel" Spacing="18">
+                        <TextBlock Foreground="{StaticResource MutedBrush}" Text="正在读取本地截图……" />
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+            <ContentControl x:Name="SettingsPageHost" IsVisible="False" />
+        </Grid>
+
+        <Border x:Name="ToastBorder"
+                Grid.Column="1"
+                Margin="20"
+                Padding="14,9"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Background="#F0FAF4"
+                BorderBrush="#B7E4C7"
+                BorderThickness="1"
+                BoxShadow="0 5 16 0 #24000000"
+                CornerRadius="8"
+                IsHitTestVisible="False"
+                IsVisible="False">
+            <StackPanel Orientation="Horizontal" Spacing="7">
+                <TextBlock VerticalAlignment="Center"
+                           FontFamily="{DynamicResource ShareX.FontFamily.Icon}"
+                           FontSize="16"
+                           Foreground="#20A464"
+                           Text="{x:Static theming:LucideIcons.check_circle}" />
+                <TextBlock x:Name="ToastText"
+                           VerticalAlignment="Center"
+                           FontSize="12"
+                           Foreground="#24543A" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

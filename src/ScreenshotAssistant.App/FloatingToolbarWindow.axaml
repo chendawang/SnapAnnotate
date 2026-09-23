@@ -1,0 +1,78 @@
+<Window
+    x:Class="ScreenshotAssistant.App.FloatingToolbarWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:theming="clr-namespace:ShareX.AvaloniaUI.Theming;assembly=ShareX.Avalonia"
+    Title="截图悬浮工具"
+    Width="188"
+    Height="60"
+    Background="Transparent"
+    CanResize="False"
+    ShowActivated="False"
+    ShowInTaskbar="False"
+    WindowDecorations="None"
+    Topmost="True"
+    TransparencyLevelHint="Transparent"
+    WindowStartupLocation="Manual">
+
+    <Window.Styles>
+        <Style Selector="Button.toolButton">
+            <Setter Property="Width" Value="48" />
+            <Setter Property="Height" Value="46" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Foreground" Value="#24272C" />
+        </Style>
+        <Style Selector="Button.toolButton:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#EDF5FF" />
+            <Setter Property="Foreground" Value="#338FF5" />
+        </Style>
+        <Style Selector="Button.closeButton:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#FFF0F0" />
+            <Setter Property="Foreground" Value="#D14343" />
+        </Style>
+        <Style Selector="TextBlock.toolIcon">
+            <Setter Property="FontFamily" Value="{DynamicResource ShareX.FontFamily.Icon}" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </Window.Styles>
+
+    <Border Margin="5"
+            Padding="4"
+            Background="White"
+            BoxShadow="0 5 18 0 #30000000"
+            CornerRadius="14">
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="1">
+            <Border Width="18"
+                    Height="38"
+                    VerticalAlignment="Center"
+                    Cursor="SizeAll"
+                    PointerPressed="DragHandle_PointerPressed">
+                <TextBlock Classes="toolIcon"
+                           FontSize="15"
+                           Foreground="#A0A6AF"
+                           Text="{x:Static theming:LucideIcons.grip_vertical}" />
+                <ToolTip.Tip>拖动悬浮工具</ToolTip.Tip>
+            </Border>
+            <Button Classes="toolButton" Click="Capture_Click">
+                <TextBlock Classes="toolIcon" Text="{x:Static theming:LucideIcons.camera}" />
+                <ToolTip.Tip>截图到文件</ToolTip.Tip>
+            </Button>
+            <Border Width="1" Height="28" VerticalAlignment="Center" Background="#ECEEF1" />
+            <Button Classes="toolButton" Click="OpenMainWindow_Click">
+                <TextBlock Classes="toolIcon" Text="{x:Static theming:LucideIcons.app_window}" />
+                <ToolTip.Tip>打开主界面</ToolTip.Tip>
+            </Button>
+            <Border Width="1" Height="28" VerticalAlignment="Center" Background="#ECEEF1" />
+            <Button Classes="toolButton closeButton" Click="CloseToolbar_Click">
+                <TextBlock Classes="toolIcon" Text="{x:Static theming:LucideIcons.x}" />
+                <ToolTip.Tip>关闭悬浮工具</ToolTip.Tip>
+            </Button>
+        </StackPanel>
+    </Border>
+</Window>

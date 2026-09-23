@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <Product>截图助手</Product>
+    <Description>快捷截图、屏幕标注与本地截图记录工具</Description>
+    <Authors>SnapAnnotate contributors</Authors>
+    <Company>SnapAnnotate</Company>
+    <RepositoryUrl>https://github.com/mercyjason/SnapAnnotate</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <Version>0.1.0</Version>
+    <FileVersion>0.1.0.0</FileVersion>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <NeutralLanguage>zh-CN</NeutralLanguage>
+    <ApplicationIcon>Assets\ScreenshotAssistant.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Avalonia.Desktop" />
+    <PackageReference Include="Avalonia.Fonts.Inter" />
+    <PackageReference Include="Avalonia.Themes.Fluent" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../ScreenshotAssistant.Capture/ScreenshotAssistant.Capture.csproj" />
+    <ProjectReference Include="../ScreenshotAssistant.Core/ScreenshotAssistant.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\ScreenshotAssistant.ico" />
+    <None Include="../../.vendor/ShareX/LICENSE.txt"
+          Link="licenses/ShareX-LICENSE.txt"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest" />
+    <None Include="../../docs/OPEN_SOURCE_COMPLIANCE.md"
+          Link="licenses/OPEN_SOURCE_COMPLIANCE.md"
+          CopyToPublishDirectory="PreserveNewest" />
+    <None Include="../../README.md"
+          Link="README.md"
+          CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

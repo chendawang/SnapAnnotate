@@ -1,0 +1,76 @@
+diff --git a/ShareX.ScreenCaptureLib/Presentation/RegionCapture/RegionSelectionOverlay.cs b/ShareX.ScreenCaptureLib/Presentation/RegionCapture/RegionSelectionOverlay.cs
+index df26e132..6ef20eac 100644
+--- a/ShareX.ScreenCaptureLib/Presentation/RegionCapture/RegionSelectionOverlay.cs
++++ b/ShareX.ScreenCaptureLib/Presentation/RegionCapture/RegionSelectionOverlay.cs
+@@ -28,6 +28,12 @@ public sealed class RegionSelectionOverlay : Control
+     public static readonly StyledProperty<IBrush> AccentBrushProperty =
+         AvaloniaProperty.Register<RegionSelectionOverlay, IBrush>(nameof(AccentBrush), Brushes.DodgerBlue);
+ 
++    public static readonly StyledProperty<double> SelectionBorderThicknessProperty =
++        AvaloniaProperty.Register<RegionSelectionOverlay, double>(nameof(SelectionBorderThickness), 1d);
++
++    public static readonly StyledProperty<DashStyle> SelectionBorderDashStyleProperty =
++        AvaloniaProperty.Register<RegionSelectionOverlay, DashStyle>(nameof(SelectionBorderDashStyle));
++
+     private static readonly IPen AntDashPen = new Pen(
+         new SolidColorBrush(Color.FromArgb(230, 0, 0, 0)),
+         1,
+@@ -42,7 +48,10 @@ public sealed class RegionSelectionOverlay : Control
+ 
+     static RegionSelectionOverlay()
+     {
+-        AffectsRender<RegionSelectionOverlay>(AccentBrushProperty);
++        AffectsRender<RegionSelectionOverlay>(
++            AccentBrushProperty,
++            SelectionBorderThicknessProperty,
++            SelectionBorderDashStyleProperty);
+     }
+ 
+     public IBrush AccentBrush
+@@ -51,6 +60,18 @@ public sealed class RegionSelectionOverlay : Control
+         set => SetValue(AccentBrushProperty, value);
+     }
+ 
++    public double SelectionBorderThickness
++    {
++        get => GetValue(SelectionBorderThicknessProperty);
++        set => SetValue(SelectionBorderThicknessProperty, value);
++    }
++
++    public DashStyle SelectionBorderDashStyle
++    {
++        get => GetValue(SelectionBorderDashStyleProperty);
++        set => SetValue(SelectionBorderDashStyleProperty, value);
++    }
++
+     public Rect SelectionRectangle
+     {
+         get => _selectionRectangle;
+@@ -161,7 +182,7 @@ public override void Render(DrawingContext context)
+                 active.Y + 0.5,
+                 Math.Max(0, active.Width - 1),
+                 Math.Max(0, active.Height - 1));
+-            DrawAntRectangle(context, antRectangle);
++            DrawSelectionRectangle(context, antRectangle);
+ 
+             if (ShowCenterCrosshair && IsValid(SelectionRectangle))
+             {
+@@ -175,13 +196,12 @@ public override void Render(DrawingContext context)
+         }
+     }
+ 
+-    private void DrawAntRectangle(DrawingContext context, Rect rectangle)
++    private void DrawSelectionRectangle(DrawingContext context, Rect rectangle)
+     {
+-        context.DrawRectangle(null, new Pen(AccentBrush, 1), rectangle);
+-        context.DrawLine(AntDashPen, rectangle.TopLeft, rectangle.TopRight);
+-        context.DrawLine(AntDashPen, rectangle.TopLeft, rectangle.BottomLeft);
+-        context.DrawLine(AntDashPen, rectangle.TopRight, rectangle.BottomRight);
+-        context.DrawLine(AntDashPen, rectangle.BottomLeft, rectangle.BottomRight);
++        context.DrawRectangle(
++            null,
++            new Pen(AccentBrush, Math.Max(1, SelectionBorderThickness), SelectionBorderDashStyle),
++            rectangle);
+     }
+ 
+     private void DrawCursorCrosshair(DrawingContext context, Rect surface)

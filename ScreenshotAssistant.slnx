@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ScreenshotAssistant.App/ScreenshotAssistant.App.csproj" />
+    <Project Path="src/ScreenshotAssistant.Capture/ScreenshotAssistant.Capture.csproj" />
+    <Project Path="src/ScreenshotAssistant.Core/ScreenshotAssistant.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ScreenshotAssistant.Capture.Tests/ScreenshotAssistant.Capture.Tests.csproj" />
+    <Project Path="tests/ScreenshotAssistant.Core.Tests/ScreenshotAssistant.Core.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,197 @@
+<UserControl
+    x:Class="ScreenshotAssistant.App.SettingsPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:theming="clr-namespace:ShareX.AvaloniaUI.Theming;assembly=ShareX.Avalonia"
+    Background="#F4F4F4"
+    Foreground="#202124">
+
+    <UserControl.Styles>
+        <Style Selector="Border.section">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="16" />
+        </Style>
+        <Style Selector="TextBlock.label">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Margin" Value="0,0,0,5" />
+        </Style>
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="#338FF5" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderBrush" Value="#338FF5" />
+            <Setter Property="Padding" Value="18,9" />
+            <Setter Property="CornerRadius" Value="6" />
+        </Style>
+        <Style Selector="Button.primary /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#338FF5" />
+            <Setter Property="BorderBrush" Value="#338FF5" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#2D82E2" />
+            <Setter Property="BorderBrush" Value="#2D82E2" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style Selector="Button.primary:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#2675CF" />
+            <Setter Property="BorderBrush" Value="#2675CF" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style Selector="Button.secondary">
+            <Setter Property="Padding" Value="14,8" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="#D9DDE3" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="CheckBox">
+            <Setter Property="MinHeight" Value="26" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid ColumnDefinitions="18,*" ColumnSpacing="8" MinHeight="26">
+                        <Border x:Name="SelectionIndicator"
+                                Width="18"
+                                Height="18"
+                                VerticalAlignment="Center"
+                                Background="White"
+                                BorderBrush="#AEB5BF"
+                                BorderThickness="1"
+                                CornerRadius="4">
+                            <TextBlock x:Name="CheckIcon"
+                                       Classes="icon"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="13"
+                                       Foreground="White"
+                                       IsVisible="False"
+                                       Text="{x:Static theming:LucideIcons.check}" />
+                        </Border>
+                        <ContentPresenter Grid.Column="1"
+                                          VerticalAlignment="Center"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:pointerover /template/ Border#SelectionIndicator">
+                <Setter Property="BorderBrush" Value="#338FF5" />
+            </Style>
+            <Style Selector="^:checked /template/ Border#SelectionIndicator">
+                <Setter Property="Background" Value="#338FF5" />
+                <Setter Property="BorderBrush" Value="#338FF5" />
+            </Style>
+            <Style Selector="^:checked /template/ TextBlock#CheckIcon">
+                <Setter Property="IsVisible" Value="True" />
+            </Style>
+        </Style>
+    </UserControl.Styles>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="8" Margin="20,16,20,12">
+            <TextBlock FontSize="24" FontWeight="SemiBold" Text="设置" />
+            <Button x:Name="CheckUpdatesButton" Grid.Column="1" Classes="secondary" Click="CheckUpdates_Click" Content="检查更新" />
+            <Button Grid.Column="2" Classes="secondary" Click="RestoreDefaults_Click" Content="恢复默认" />
+            <Button Grid.Column="3" Classes="primary" Click="Save_Click" Content="保存设置" />
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" Margin="20,0,20,12" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Spacing="12">
+                <Border Classes="section">
+                    <StackPanel Spacing="12">
+                        <TextBlock FontSize="16" FontWeight="SemiBold" Text="系统" />
+                        <CheckBox x:Name="CloseToTrayCheckBox" Content="关闭主窗口时继续在托盘运行" />
+                        <CheckBox x:Name="StartWithWindowsCheckBox" Content="开机后自动启动" />
+                        <CheckBox x:Name="ShowFloatingToolbarCheckBox" Content="显示悬浮工具" />
+                        <TextBlock FontSize="11" Foreground="#777C85" Text="单实例保护已启用；自动启动时仅显示托盘。" />
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="section">
+                    <StackPanel Spacing="12">
+                        <TextBlock FontSize="16" FontWeight="SemiBold" Text="快捷键与捕获" />
+                        <Grid ColumnDefinitions="*,220" ColumnSpacing="16">
+                            <TextBlock Classes="label" VerticalAlignment="Center" Text="全局截图快捷键" />
+                            <ComboBox x:Name="HotkeyComboBox" Grid.Column="1" />
+                        </Grid>
+                        <Grid ColumnDefinitions="*,220" ColumnSpacing="16">
+                            <TextBlock Classes="label" VerticalAlignment="Center" Text="冻结范围" />
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="16">
+                                <RadioButton x:Name="AllDisplaysRadio" GroupName="CaptureScope" Content="全部显示器" />
+                                <RadioButton x:Name="ActiveMonitorRadio" GroupName="CaptureScope" Content="当前显示器" />
+                            </StackPanel>
+                        </Grid>
+                        <TextBlock FontSize="11" Foreground="#777C85" Text="保存后立即重新注册快捷键；快捷键截图保存 PNG 并自动复制到剪切板。" />
+                        <WrapPanel ItemWidth="260" ItemHeight="32">
+                            <CheckBox x:Name="DetectWindowsCheckBox" Content="自动识别窗口" />
+                            <CheckBox x:Name="DetectControlsCheckBox" Content="识别窗口内控件" />
+                            <CheckBox x:Name="CaptureCursorCheckBox" Content="捕获鼠标指针" />
+                            <CheckBox x:Name="ShowMagnifierCheckBox" Content="显示像素放大镜" />
+                            <CheckBox x:Name="SquareMagnifierCheckBox" Content="使用方形放大镜" />
+                            <CheckBox x:Name="ShowInfoCheckBox" Content="显示坐标和颜色信息" />
+                            <CheckBox x:Name="ShowCenterCrosshairCheckBox" Content="选区显示中心十字线" />
+                            <CheckBox x:Name="ShowScreenCrosshairCheckBox" Content="显示屏幕十字线" />
+                        </WrapPanel>
+                        <Grid ColumnDefinitions="*,130" ColumnSpacing="16">
+                            <TextBlock Classes="label" VerticalAlignment="Center" Text="背景遮罩强度" />
+                            <NumericUpDown x:Name="BackgroundDimInput" Grid.Column="1" Minimum="0" Maximum="90" Increment="5" />
+                        </Grid>
+                        <Grid ColumnDefinitions="*,130" ColumnSpacing="16">
+                            <TextBlock Classes="label" VerticalAlignment="Center" Text="截图框线条类型" />
+                            <ComboBox x:Name="SelectionFrameStyleComboBox" Grid.Column="1">
+                                <ComboBoxItem Content="实线" />
+                                <ComboBoxItem Content="虚线" />
+                                <ComboBoxItem Content="点线" />
+                            </ComboBox>
+                        </Grid>
+                        <Grid ColumnDefinitions="*,130" ColumnSpacing="16">
+                            <TextBlock Classes="label" VerticalAlignment="Center" Text="截图框颜色" />
+                            <TextBox x:Name="SelectionFrameColorTextBox" Grid.Column="1" PlaceholderText="#338FF5" />
+                        </Grid>
+                        <Grid ColumnDefinitions="*,130" ColumnSpacing="16">
+                            <TextBlock Classes="label" VerticalAlignment="Center" Text="截图框粗细" />
+                            <NumericUpDown x:Name="SelectionFrameThicknessInput" Grid.Column="1" Minimum="1" Maximum="8" Increment="1" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="section">
+                    <StackPanel Spacing="12">
+                        <TextBlock FontSize="16" FontWeight="SemiBold" Text="标注" />
+                        <CheckBox x:Name="EnableAnnotationsCheckBox" Content="在冻结屏幕上启用标注工具" />
+                        <Grid ColumnDefinitions="*,130" ColumnSpacing="16">
+                            <TextBlock Classes="label" VerticalAlignment="Center" Text="默认线条粗细" />
+                            <NumericUpDown x:Name="ThicknessInput" Grid.Column="1" Minimum="1" Maximum="30" Increment="1" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="section">
+                    <StackPanel Spacing="12">
+                        <TextBlock FontSize="16" FontWeight="SemiBold" Text="保存" />
+                        <StackPanel>
+                            <TextBlock Classes="label" Text="保存目录" />
+                            <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                                <TextBox x:Name="SaveDirectoryTextBox" IsReadOnly="False" PlaceholderText="可直接输入或浏览选择保存目录" />
+                                <Button Grid.Column="1" Click="BrowseDirectory_Click" Content="浏览…" />
+                                <Button Grid.Column="2" Click="OpenSaveDirectory_Click" Content="打开" />
+                            </Grid>
+                        </StackPanel>
+                        <CheckBox x:Name="OrganizeByMonthCheckBox" Content="按 年/月 自动建立子目录" />
+                        <StackPanel>
+                            <TextBlock Classes="label" Text="文件名模板" />
+                            <TextBox x:Name="FileNamePatternTextBox" TextChanged="FileNamePattern_TextChanged" />
+                            <TextBlock Margin="0,5,0,0" FontSize="11" Foreground="#777C85" Text="可用变量：%y 年、%mo 月、%d 日、%h 时、%mi 分、%s 秒、%ms 毫秒、%width 宽、%height 高" TextWrapping="Wrap" />
+                            <TextBlock x:Name="FileNamePreviewText" Margin="0,4,0,0" FontSize="11" Foreground="#4F657D" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <Border Grid.Row="2" Padding="14,9" Background="White" BorderBrush="#E5E5E5" BorderThickness="0,1,0,0">
+            <TextBlock x:Name="SettingsStatusText" FontSize="12" Foreground="#C2413B" />
+        </Border>
+    </Grid>
+</UserControl>
